@@ -1,9 +1,10 @@
 from tkinter import *
 import random
+import os
+import sys
 
-
-GAME_WIDTH = 700
-GAME_HEIGHT = 700
+GAME_WIDTH = 600
+GAME_HEIGHT = 600
 SPEED = 100
 SPACE_SIZE =25
 BODY_PARTS = 3
@@ -121,6 +122,9 @@ def game_over():
     canvas.delete(ALL)
     canvas.create_text(canvas.winfo_width()/2,canvas.winfo_height()/2, font=('consolas', 70), text ="GAME OVER", fill="red", tag="gameover")
 
+def restart():
+    os.execl(sys.executable, sys.executable, *sys.argv)
+
 
 window = Tk()
 window.title("Snake game")
@@ -135,6 +139,8 @@ label.pack()
 canvas = Canvas(window, bg=BACKGROUND_COLOR, height=GAME_HEIGHT, width=GAME_WIDTH)
 canvas.pack()
 
+restart_button = Button(window, text="Restart",font=('consolas', 25) ,command=restart)
+restart_button.pack()
 
 window.update()
 
